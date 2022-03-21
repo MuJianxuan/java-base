@@ -14,6 +14,10 @@ public class RpcClient {
 
     public static void main(String[] args) {
 
+        // 添加移除
+        Runtime.getRuntime().addShutdownHook( new Thread( () -> {
+
+        }));
 
         // 代理解析
         HelloService helloService = (HelloService) Proxy.newProxyInstance( Thread.currentThread().getContextClassLoader() , new Class[]{HelloService.class}, new RpcProxyHandler( HelloService.class));

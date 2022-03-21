@@ -10,6 +10,7 @@ import io.netty.handler.codec.string.StringDecoder;
 import io.netty.handler.codec.string.StringEncoder;
 import io.netty.util.concurrent.DefaultPromise;
 import lombok.extern.slf4j.Slf4j;
+import org.rao.netty.rpc.BootstrapClientUtils;
 import org.rao.netty.rpc.msg.RpcRequestMessage;
 import org.rao.netty.rpc.msg.RpcResponseMessage;
 
@@ -45,36 +46,13 @@ public class RpcProxyHandler implements InvocationHandler {
         // 发送消息给 server端
         //创建一个承诺
         DefaultPromise<String> responsePromise = new DefaultPromise<String>(new NioEventLoopGroup().next());
-        Channel channel = null;
-
-        // ? 是否要使用全局线程池呢?
-        NioEventLoopGroup nioEventLoopGroup = new NioEventLoopGroup();
 
         try {
-            // 这一部分应该 重构，优化创建，应该存在则不创建
-            Bootstrap bootstrap = new Bootstrap();
-            ChannelFuture connect = bootstrap.group(nioEventLoopGroup)
-                    .channel(NioSocketChannel.class)
-                    .handler(new ChannelInitializer<SocketChannel>() {
-                        @Override
-                        protected void initChannel(SocketChannel ch) throws Exception {
-                            ch.pipeline().addLast(new StringDecoder());
-                            ch.pipeline().addLast(new StringEncoder());
-                            ch.pipeline().addLast(new ChannelInboundHandlerAdapter(){
-                                @Override
-                                public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
-                                    String responseJson = (String) msg;
-                                    log.info("response:{}",responseJson);
-                                    responsePromise.setSuccess( responseJson );
-                                }
-                            });
-                        }
-                    })
-                    .connect("localhost", 8080);
-
-            channel = connect.sync().channel();
+            // 这一部分应该 重构，优化创建，应该存在则不创建 --> ip:端口  ::  channel
+            Channel channel = BootstrapClientUtils.getChannel("localhost:8080",responsePromise);
             channel.writeAndFlush(rpcMsg );
-            // 解析响应消息
+
+            // 等待响应 10s
             String responseJson = responsePromise.get(10, TimeUnit.SECONDS);
             RpcResponseMessage rpcResponseMessage = JSON.parseObject(responseJson, RpcResponseMessage.class);
 
@@ -89,12 +67,6 @@ public class RpcProxyHandler implements InvocationHandler {
             // 或者是 获取等待超时
 
             throw ex;
-
-        } finally {
-            if (channel != null) {
-                channel.close();
-                nioEventLoopGroup.shutdownGracefully();
-            }
 
         }
     }
