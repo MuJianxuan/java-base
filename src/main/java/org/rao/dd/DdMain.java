@@ -1,6 +1,7 @@
 package org.rao.dd;
 
-import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * @author Rao
@@ -11,6 +12,9 @@ public class DdMain {
     public static void main(String[] args) {
 
         Solution solution = new Solution();
+        Map<String, String > map = new HashMap<>();
+        //map.containsKey();
+
 
         int[] arr = {3,4,6,6,3};
         long game = solution.arrayGame(arr);
