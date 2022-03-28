@@ -13,6 +13,10 @@ import lombok.ToString;
 @Setter
 public class RpcResponseMessage {
 
+    /**
+     * 请求ID
+     */
+    private String reqId;
 
     /**
      * 异常信息
