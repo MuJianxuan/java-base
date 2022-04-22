@@ -1,10 +1,18 @@
 package org.rao.mail;
 
-import org.springframework.mail.SimpleMailMessage;
+import org.rao.file.FileMain;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.mail.javamail.MimeMessageHelper;
 
+import javax.activation.DataHandler;
 import javax.mail.internet.MimeMessage;
+import javax.mail.internet.MimeUtility;
+import javax.mail.util.ByteArrayDataSource;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.InputStream;
+import java.net.URL;
+import java.nio.charset.StandardCharsets;
 import java.util.Properties;
 
 /**
@@ -97,22 +105,34 @@ public class MailMain {
 //        mailMessage.setSubject("这是测试邮件2");
 //        mailMessage.setText( " 测试主体");
 
-        // html
+
         MimeMessage mimeMessage = sender.createMimeMessage();
         try {
-            MimeMessageHelper mimeMessageHelper = new MimeMessageHelper(mimeMessage);
+
+            // html 内容
+            MimeMessageHelper mimeMessageHelper = new MimeMessageHelper(mimeMessage,true);
             mimeMessageHelper.setSubject("Rao测试");
             mimeMessageHelper.setText( content,true);
             mimeMessageHelper.setTo("1762725704@qq.com");
             mimeMessageHelper.setFrom( mailInfo.getUserName() );
 
+            // 本地附件
+            File file = new File( FileMain.class.getClassLoader().getResource("ddd.txt").getPath() );
+            mimeMessageHelper.addAttachment(MimeUtility.encodeWord( "附件.txt", StandardCharsets.UTF_8.name(),"B" ), file );
+
+            // 网络附件
+            String path2 = "http://www.pptbz.com/pptpic/UploadFiles_6909/201203/2012031220134655.jpg";
+            URL url = new URL(path2);
+            InputStream inputStream = url.openStream();
+
+            // content-type
+            ByteArrayDataSource byteArrayDataSource = new ByteArrayDataSource(inputStream, "image/jpeg;charset=UTF-8");
+            mimeMessageHelper.addAttachment( MimeUtility.encodeWord( "图片.jpg", StandardCharsets.UTF_8.name(),"B" ), byteArrayDataSource);
+
+
         } catch (Exception ex){
             ex.printStackTrace();
         }
-
-        // 附件
-
-
 
         sender.send( mimeMessage );
 
