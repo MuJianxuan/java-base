@@ -136,7 +136,5 @@ public class MailMain {
 
         sender.send( mimeMessage );
 
-
-
     }
 }

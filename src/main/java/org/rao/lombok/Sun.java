@@ -9,16 +9,15 @@ import java.io.Serializable;
  * desc:
  *
  * @author Rao
- * @Date 2022/04/25
+ * @Date 2022/04/26
  **/
-@AllArgsConstructor
+@SuperBuilder
+@EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor
+@AllArgsConstructor
 @Setter
 @Getter
 @ToString(callSuper = true)
-@SuperBuilder
-public class User implements Serializable {
-
-    @Builder.Default
-    private String name = "0";
+public class Sun extends User implements Serializable {
+    private int age;
 }
