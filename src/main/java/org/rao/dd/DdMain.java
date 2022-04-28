@@ -1,5 +1,7 @@
 package org.rao.dd;
 
+import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -11,14 +13,17 @@ public class DdMain {
 
     public static void main(String[] args) {
 
-        Solution solution = new Solution();
-        Map<String, String > map = new HashMap<>();
-        //map.containsKey();
 
+        System.out.println(StandardCharsets.UTF_8.name());
 
-        int[] arr = {3,4,6,6,3};
-        long game = solution.arrayGame(arr);
-        System.out.println(game);
+//        Solution solution = new Solution();
+//        Map<String, String > map = new HashMap<>();
+//        //map.containsKey();
+//
+//
+//        int[] arr = {3,4,6,6,3};
+//        long game = solution.arrayGame(arr);
+//        System.out.println(game);
 
     }
 
