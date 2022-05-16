@@ -1,5 +1,6 @@
 package org.rao.openfeign;
 
+import org.rao.openfeign.configuration.BaiduMapOpenFeignConfiguration;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -10,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
  * @author Rao
  * @Date 2022/05/16
  **/
-@FeignClient(name = "baiduMapOpenFeign",url = "https://api.map.baidu.com",configuration = {})
+@FeignClient(name = "baiduMapOpenFeign",url = "${spring.yum:https://api.map.baidu.com}",configuration = {BaiduMapOpenFeignConfiguration.class})
 public interface BaiduMapOpenFeign {
 
     /**
