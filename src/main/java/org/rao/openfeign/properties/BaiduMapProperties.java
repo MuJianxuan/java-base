@@ -1,10 +1,10 @@
-package org.rao.openfeign.configuration;
+package org.rao.openfeign.properties;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.rao.openfeign.model.enums.Output;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.ScopedProxyMode;
 
 /**
@@ -14,12 +14,12 @@ import org.springframework.context.annotation.ScopedProxyMode;
  * @author Rao
  * @Date 2022/05/17
  **/
-@RefreshScope(proxyMode = ScopedProxyMode.DEFAULT)
+@RefreshScope(proxyMode = ScopedProxyMode.NO)
 @Setter
 @Getter
-//@Configuration
 @ConfigurationProperties(prefix = "application.baidu-map")
 public class BaiduMapProperties {
+
 
     /**
      * 域名
@@ -27,8 +27,13 @@ public class BaiduMapProperties {
     private String url;
 
     /**
-     * ak 密钥
+     * ak 密钥 ，百度开发平台注册并填写。https://lbsyun.baidu.com/index.php?title=%E9%A6%96%E9%A1%B5
      */
     private String ak;
+
+    /**
+     * 输出 xml/json
+     */
+    private Output output = Output.json;
 
 }
