@@ -42,7 +42,7 @@ public class BaiduMapOpenFeignConfiguration {
         @Override
         public void apply(RequestTemplate template) {
             template.query("output","json");
-            template.query("ak","ZDPtk1UBQ8hSvSHqVF31e7EoMBg9V7F2");
+//            template.query("ak","");
         }
     }
 

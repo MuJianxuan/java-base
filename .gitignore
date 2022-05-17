@@ -1,6 +1,6 @@
 # Compiled class file
 *.class
-
+application-dev.yaml
 .idea
 target
 *.iml

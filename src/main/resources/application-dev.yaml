@@ -1,0 +1,4 @@
+application:
+  baidu-map:
+    url: "https://api.map.baidu.com"
+    ak: "ZDPtk1UBQ8hSvSHqVF31e7EoMBg9V7F2"

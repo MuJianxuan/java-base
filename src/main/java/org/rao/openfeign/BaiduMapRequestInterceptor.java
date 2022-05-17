@@ -21,7 +21,7 @@ public class BaiduMapRequestInterceptor implements RequestInterceptor {
 
     @Override
     public void apply(RequestTemplate template) {
-        template.query("output","xml");
+        template.query("output","json");
         template.query("ak",baiduMapProperties.getAk() );
     }
 }

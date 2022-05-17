@@ -5,6 +5,7 @@ import lombok.Setter;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.ScopedProxyMode;
 
 /**
  * desc:
@@ -13,10 +14,10 @@ import org.springframework.context.annotation.Configuration;
  * @author Rao
  * @Date 2022/05/17
  **/
-@RefreshScope
+@RefreshScope(proxyMode = ScopedProxyMode.DEFAULT)
 @Setter
 @Getter
-@Configuration
+//@Configuration
 @ConfigurationProperties(prefix = "application.baidu-map")
 public class BaiduMapProperties {
 
