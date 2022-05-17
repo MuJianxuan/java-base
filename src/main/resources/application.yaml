@@ -1,2 +1,4 @@
-spring:
-  yum: https://baidu.com
+application:
+  baidu-map:
+    url: "https://api.map.baidu.com"
+    ak: ""

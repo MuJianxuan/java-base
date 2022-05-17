@@ -8,10 +8,10 @@ import org.springframework.web.bind.annotation.RequestParam;
  * desc:
  *
  * @author Rao
- * @Date 2022/05/16
+ * @Date 2022/05/17
  **/
-@FeignClient(name = "baiduMapOpenFeign",url = "${application.baidu-map.url:https://api.map.baidu.com}",configuration = {BaiduMapRequestInterceptor.class})
-public interface BaiduMapOpenFeign {
+@FeignClient(name = "baiduTestFeignClient",url = "${spring.yum:https://api.map.baidu.com}")
+public interface BaiduTestFeignClient {
 
     /**
      * 查询地址经纬度信息
