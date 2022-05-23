@@ -24,8 +24,8 @@ import java.util.List;
  * @Date 2022/05/17
  **/
 @Configuration
-@ComponentScan("net.bncloud.baidu")
-@EnableFeignClients(basePackages = {"net.bncloud.baidu.api"})
+@ComponentScan("org.rao.openfeign")
+@EnableFeignClients(basePackages = {"org.rao.openfeign.api"})
 @Import({BaiduMapFeignClientFallbackFactory.class, BaiduMapProperties.class})
 public class BaiduMapConfiguration {
 

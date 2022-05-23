@@ -15,7 +15,9 @@ public class BaiduMapResultUtils {
      * 成功
      */
     public static void successfulResult(BaiduMapResultCheck baiduMapResultCheck){
-//        Asserts.isTrue( baiduMapResultCheck.normalState(),"百度地图接口请求结果非正常，请手动debug接口结果！" );
+        if (! baiduMapResultCheck.normalState() ){
+            throw new RuntimeException("百度地图接口请求结果非正常，请手动debug接口结果！");
+        }
     }
 
 }

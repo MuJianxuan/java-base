@@ -8,6 +8,7 @@ import org.rao.openfeign.model.vo.BaiduMapGeoCodingResult;
 import org.rao.openfeign.model.vo.BaiduMapRegionResult;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.cloud.openfeign.SpringQueryMap;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
 
 /**
